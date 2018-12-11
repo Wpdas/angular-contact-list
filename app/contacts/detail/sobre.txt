@@ -1,0 +1,7 @@
+Aqui e possivel ver como estilizar classes de acordo com os estados de um elemento que usa [ngModule] com os valores:
+1 - .ng-untouched, ng-touched
+2 - .ng-pristine, ng-dirty
+3 - .ng-invalid, ng-valid
+
+#name="ngModel" -> Significa que vc esta pegando a referencia do comportamento do elemento e colocando na variavel "name"
+sendo possivel pegar os valores das propriedades desta variavel, exemplo: name.valid || name.pristine (usado no template)

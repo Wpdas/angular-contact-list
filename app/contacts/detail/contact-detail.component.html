@@ -1,0 +1,102 @@
+<div class="container">
+  <h2>Save Contact</h2>
+
+  <!--
+    Atribui valor a propriedade contactForm e expoe ela para ser acessada no escopo
+  -->
+  <!--
+    serve para controlar o form (angular), vamos usar pra controlar o botao save
+  -->
+  <form #contactForm="ngForm">
+    <div
+      class="form-group"
+      [ngClass]="getFormGroupClass(name.valid, name.pristine)"
+    >
+      <label for="name" class="form-control-label">Name</label>
+      <!-- One Way Binding -->
+      <!--
+        <input type="text" class="form-control" placeholder="Insert the name" value="{{ contact.name }}">
+        <input type="text" class="form-control" placeholder="Insert the name" [value]="contact.name">
+      -->
+      <!--
+        Two Way Data Binding -> Recebe o evento com os dados do objeto editado no caso "contact.name"
+      -->
+      <!--
+        <input type="text" class="form-control" placeholder="Insert the name"
+        name="name"
+        [ngModel]="contact.name" // Propertie Bind
+        (ngModelChange)="contact.name = $event"> // Event Bind
+      -->
+
+      <!-- Existe o formato abaixo mais simples (Two way) -->
+      <input
+        type="text"
+        class="form-control"
+        [ngClass]="getFormControlClass(name.valid, name.pristine)"
+        placeholder="Insert the name"
+        required
+        name="name"
+        #name="ngModel"
+        [(ngModel)]="contact.name"
+      />
+      <div class="form-control-feedback" [hidden]="name.valid || name.pristine">
+        The name field is obligatory!
+      </div>
+    </div>
+
+    <div
+      class="form-group"
+      [ngClass]="getFormGroupClass(email.valid, email.pristine)"
+    >
+      <label for="email">Email</label>
+      <input
+        type="email"
+        class="form-control"
+        [ngClass]="getFormControlClass(email.valid, email.pristine)"
+        placeholder="Insert the email"
+        required
+        name="email"
+        #email="ngModel"
+        [(ngModel)]="contact.email"
+      />
+      <div
+        class="form-control-feedback"
+        [hidden]="email.valid || email.pristine"
+      >
+        The email field is obligatory!
+      </div>
+    </div>
+
+    <div
+      class="form-group"
+      [ngClass]="getFormGroupClass(telephone.valid, telephone.pristine)"
+    >
+      <label for="telephone">Telephone</label>
+      <input
+        type="number"
+        class="form-control"
+        placeholder="Insert the telephone"
+        required
+        name="telephone"
+        #telephone="ngModel"
+        [(ngModel)]="contact.telephone"
+      />
+      <div
+        class="form-control-feedback"
+        [hidden]="telephone.valid || telephone.pristine"
+      >
+        The telephone field is obligatory!
+      </div>
+    </div>
+
+    <!-- Usa o recurso de validade do atributo criado "contactForm" -->
+    <button
+      type="submit"
+      class="btn btn-success"
+      [disabled]="!contactForm.form.valid"
+    >
+      Save
+    </button>
+    <a class="btn btn-secondary" routerLink="/">Back</a>
+  </form>
+</div>
